@@ -51,6 +51,10 @@ and can be spread over multiple cores (default `8`).
 
 See the [phosh-data-packager manpage](doc/phosh-osk-data-packager.rst).
 
+## Available Languages
+
+For a list of available languages see <https://data.phosh.mobi/osk-data/latest/presage/>.
+
 ## Related projects
 
 - presage: <http://presage.sourceforge.net/>
