@@ -23,6 +23,7 @@ Once there get the Wikipedia dump:
 
 ```sh
 ssh ${BUILDER}
+mkdir output/
 cd output/
 export LANG=es
 wget "https://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-pages-articles.xml.bz2"
@@ -37,7 +38,7 @@ python3 -c "import nltk; nltk.download('punkt')"
 Process the dump
 
 ```sh
-./pod-db-from-wiki-dump --processes 4 --language "${LANG}" --dump "output/${LANG}wiki-latest-pages-articles.xml.bz2" --output  "output/${LANG}"
+./pod-db-from-wiki-dump --processes "$(nproc)" --language "${LANG}" --dump "output/${LANG}wiki-latest-pages-articles.xml.bz2" --output  "output/${LANG}"
 ```
 
 You'll then get a database usable by presage based completers in `output/${LANG}/database_${LANG}.db`.
@@ -50,15 +51,19 @@ and can be spread over multiple cores (default `8`).
 
 See the [phosh-data-packager manpage](doc/phosh-osk-data-packager.rst).
 
+## Available Languages
+
+For a list of available languages see <https://data.phosh.mobi/osk-data/latest/presage/>.
+
 ## Related projects
 
 - presage: <http://presage.sourceforge.net/>
 - sfos presage databases: <https://github.com/sailfish-keyboard/presage-database>
-- stevia on screen keyboard: <https://gitlab.gnome.org/guidog/stevia>
+- stevia on screen keyboard: <https://gitlab.gnome.org/World/Phosh/stevia>
 
 ## Getting in Touch
 
-- Issue tracker: <https://gitlab.gnome.org/guidog/phosh-osk-data/issues/>
-- Matrix: <https://matrix.to/#/#phosh:sigxcpu.org>
+- Issue tracker: <https://gitlab.gnome.org/World/Phosh/phosh-osk-data/issues/>
+- Matrix: <https://matrix.to/#/#phosh:phosh.mobi>
 
-[phosh-osk-stevia]: https://gitlab.gnome.org/guidog/stevia
+[phosh-osk-stevia]: https://gitlab.gnome.org/World/Phosh/stevia

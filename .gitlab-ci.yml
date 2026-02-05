@@ -1,6 +1,6 @@
 ---
 include:
-  - project: 'guidog/meta-phosh'
+  - project: 'World/Phosh/meta-phosh'
     ref: '5e3667e2e4d3f23a5dcadaa2a4aadc8824a9e565'
     file: '/ci/phosh-common-jobs.yml'
   - project: 'Infrastructure/freedesktop-ci-templates'
@@ -28,8 +28,8 @@ default:
 
 variables:
   # For ci-fairy
-  FDO_UPSTREAM_REPO: guidog/phosh-osk-data
-  DEBIAN_IMAGE: $CI_REGISTRY/guidog/stevia/debian:v0.0.2025-05-19
+  FDO_UPSTREAM_REPO: World/Phosh/phosh-osk-data
+  DEBIAN_IMAGE: $CI_REGISTRY/world/phosh/stevia/debian:v0.0.2025-11-14
 
 .prep: &prep
   before_script:

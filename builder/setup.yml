@@ -1,3 +1,4 @@
+---
 - name: Setup Phosh OSK Data wiki builder
   gather_facts: false
   hosts: all
@@ -6,9 +7,14 @@
     pod_home: "/home/pod-builder"
     wikiextractorpkg: "wikiextractor_3.0.7-1_all.deb"
   tasks:
+    - name: Ensure we have a package list
+      ansible.builtin.apt:
+        update_cache: true
+
     - name: Add packages
       ansible.builtin.apt:
         pkg:
+          - git
           - htop
           - kitty-terminfo
           - python3-nltk
