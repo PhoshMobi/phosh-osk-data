@@ -14,6 +14,7 @@
     - name: Add packages
       ansible.builtin.apt:
         pkg:
+          - git
           - htop
           - kitty-terminfo
           - python3-nltk
