@@ -38,7 +38,7 @@ python3 -c "import nltk; nltk.download('punkt')"
 Process the dump
 
 ```sh
-./pod-db-from-wiki-dump --processes 4 --language "${LANG}" --dump "output/${LANG}wiki-latest-pages-articles.xml.bz2" --output  "output/${LANG}"
+./pod-db-from-wiki-dump --processes "$(nproc)" --language "${LANG}" --dump "output/${LANG}wiki-latest-pages-articles.xml.bz2" --output  "output/${LANG}"
 ```
 
 You'll then get a database usable by presage based completers in `output/${LANG}/database_${LANG}.db`.
