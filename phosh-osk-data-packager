@@ -40,13 +40,14 @@ Source: phosh-osk-data
 Version: {VERSION}-1
 Architecture: all
 Maintainer: Phosh Developers <deb@phosh.mobi>
-Suggests: phosh-osk-stub
+Suggests: phosh-osk-stevia
 Breaks: phosh-osk-data-eu (<< 0.42)
 Replaces: phosh-osk-data-eu (<< 0.42)
 Section: text
 Priority: optional
-Description: OSK completion data for phosh - {lang}
- Data to enable text completion in phosh-osk-stub via {engine}.
+Description: OSK completion data for Phosh - {lang}
+ Data to enable text completion in Phosh's On Screen Keyboard
+ Stevia via {engine}.
  .
  This package contains the data files for {lang}.
  .

@@ -54,4 +54,4 @@ into the current directory:
 See also
 --------
 
-``phosh-osk-stub(1)``
+``phosh-osk-stevia(1)``
