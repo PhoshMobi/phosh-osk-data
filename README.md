@@ -23,6 +23,7 @@ Once there get the Wikipedia dump:
 
 ```sh
 ssh ${BUILDER}
+mkdir output/
 cd output/
 export LANG=es
 wget "https://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-pages-articles.xml.bz2"
