@@ -21,9 +21,10 @@ Depends:
 Recommends:
  pkexec,
 Suggests:
- phosh-osk-stub,
+ phosh-osk-stevia,
 Description: OSK completion data packager for Phosh
- Data to enable text completion in phosh-osk-stub via presage.
+ Data to enable text completion in Phosh's On Screen Keyboard 
+ Stevia via presage.
  .
  This package contains as script to download and package data
  files.

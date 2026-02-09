@@ -1,12 +1,12 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: https://gitlab.gnome.org/guidog/phosh-osk-data
 Upstream-Name: phosh-osk-data
-Upstream-Contact: Guido Günther <agx@sigxcpu.org>
+Upstream-Contact: The Phosh Developers <deb@phosh.mobi>
 
 Files:
  *
 Copyright:
- 2024 Guido Günther <agx@sigxcpu.org>
+ 2024-2026 Phosh.mobi e.V.
 License: GPL-2+
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by

@@ -1,3 +1,26 @@
+phosh-osk-data (0.53.0) experimental; urgency=medium
+
+  * ci: Test packaging step.
+    This will be helpful once we support more formats
+  * ci: Fix indent.
+    We indent with 2 spaces
+  * ci: Use GNOME mirror for ci templates.
+    Modernize sanity job for that.
+  * ci: Update CI image
+    phosh-osk-stub is now stevia
+  * doc: Add languages to code blocks
+  * doc: phosh-osk-stub is now stevia
+  * doc: Add getting in touch section
+  * treewide: Update URLs.
+  * setup: Ensure a package list.
+    VM hosts might not have one
+  * doc: Ensure we have the output dir.
+  * doc: Use all cores.
+  * doc: Add link to language databases.
+  * setup: Add git. Allows us to clone the repo
+
+ -- Guido Günther <agx@sigxcpu.org>  Thu, 05 Feb 2026 18:12:58 +0100
+
 phosh-osk-data (0.42.0) experimental; urgency=medium
 
   * Release 0.42.0
