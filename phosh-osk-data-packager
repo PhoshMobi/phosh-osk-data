@@ -8,11 +8,12 @@
 #
 # Build a package for the given OSK data
 
-import sys
 import argparse
-import subprocess
+import os
 import requests
 import shutil
+import subprocess
+import sys
 from tempfile import TemporaryDirectory
 from tqdm import tqdm
 from pathlib import Path
@@ -61,6 +62,11 @@ Description: OSK completion data for Phosh - {lang}
     return deb
 
 
+def build_plain(dbfile, dir, engine, lang):
+    # Plain packaging is a noop
+    return dbfile
+
+
 def download_db(dir, engine, lang):
     dbname = f'database_{lang}.db'
     dbfile = Path(dir) / dbname
@@ -88,6 +94,18 @@ def install_deb(pkg):
         print(f"Failed to install package: {e}", file=sys.stderr)
 
 
+def install_plain(dbfile, engine):
+    xdg_data_home = os.environ.get("XDG_DATA_HOME")
+    if xdg_data_home:
+        xdg_data_home = Path(xdg_data_home)
+    else:
+        xdg_data_home = Path.home() / ".local" / "share"
+
+    dbdir = xdg_data_home / 'phosh' / 'osk' / engine
+    dbdir.mkdir(parents=True, exist_ok=True)
+    shutil.copy(dbfile, dbdir)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Download and Build a package for the given OSK data"
@@ -99,7 +117,7 @@ def main():
         "--engine", type=str, default='presage', choices=['presage'], help="Completion engine"
     )
     parser.add_argument(
-        "--pkg", type=str, default='deb', choices=['deb'], help="Package format"
+        "--pkg", type=str, default='deb', choices=['deb', 'plain'], help="Package format"
     )
     parser.add_argument(
         "--install", action="store_true", help="Install the built package"
@@ -111,18 +129,24 @@ def main():
         if not dbfile:
             return 1
 
-        if args.pkg == 'deb':
-            pkg = build_deb(dbfile, dir, args.engine, args.language)
-        else:
-            print(f"Unsupported packaging format '{args.pkg}'", file=sys.stderr)
-            return 1
+        match args.pkg:
+            case 'deb':
+                pkg = build_deb(dbfile, dir, args.engine, args.language)
+            case 'plain':
+                pkg = build_plain(dbfile, dir, args.engine, args.language)
+            case _:
+                print(f"Unsupported packaging format '{args.pkg}'", file=sys.stderr)
+                return 1
 
         if args.install:
-            if args.pkg == 'deb':
-                pkg = install_deb(pkg)
-            else:
-                print(f"Don't know how to install '{args.pkg}'", file=sys.stderr)
-                return 1
+            match args.pkg:
+                case 'deb':
+                    pkg = install_deb(pkg)
+                case 'plain':
+                    pkg = install_plain(dbfile, args.engine)
+                case _:
+                    print(f"Don't know how to install '{args.pkg}'", file=sys.stderr)
+                    return 1
         else:
             shutil.move(pkg, '.')
 
