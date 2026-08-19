@@ -26,5 +26,5 @@ Description: OSK completion data packager for Phosh
  Data to enable text completion in Phosh's On Screen Keyboard 
  Stevia via presage.
  .
- This package contains as script to download and package data
+ This package contains a script to download and package data
  files.
