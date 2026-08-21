@@ -29,7 +29,7 @@ default:
 variables:
   # For ci-fairy
   FDO_UPSTREAM_REPO: World/Phosh/phosh-osk-data
-  DEBIAN_IMAGE: $CI_REGISTRY/world/phosh/stevia/debian:v0.0.2025-11-14
+  DEBIAN_IMAGE: $CI_REGISTRY/world/phosh/stevia/debian:v0.0.2026-08-19
 
 .prep: &prep
   before_script:
@@ -70,7 +70,7 @@ sanity:
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME'
 
-build:native-debian-trixie:
+build:native-debian-forky:
   stage: build
   image: ${DEBIAN_IMAGE}
   <<: *prep
