@@ -34,11 +34,14 @@ OPTIONS
    engine is `presage` using it's sqlite backend.
 
 ``--pkg=FORMAT``
-   The packaging format to build a package for. The only currently supported
-   format is `deb` building a package for Debian based distributions.
+   The packaging format to build a package for. The currently supported
+   format is `deb` building a package for Debian based distributions and
+   `plain` using the unpackaged file
 
 ``--install``
-   Whether to install the package
+   Whether to install the package. This installs the downloaded and packaged
+   data. Depending on the format the data is installed system wide (e.g. `deb`)
+   or in the current users `XDG_DATA_HOME` (e.g. `plain`).
 
 EXAMPLE
 -------
@@ -50,6 +53,12 @@ into the current directory:
 
     ./phosh-osk-data-packager --language=se
 
+This downloads and packages data for Ukranian and puts the resulting package
+into the current users `XDG_DATA_HOME`.
+
+::
+
+   ./phosh-osk-data-packager --install --language=uk
 
 See also
 --------
