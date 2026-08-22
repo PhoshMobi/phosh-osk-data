@@ -14,7 +14,7 @@ You can then provision it with the provided ansible playbook on your
 cloud provider of choice:
 
 ```sh
-   ansible-playbook -v -i "${BUILDER}", -u root  builder/setup.yml
+ansible-playbook -v -i "${BUILDER}", -u root  builder/setup.yml
 ```
 
 `${BUILDER}` is the IP or hostname of the host to provision.
