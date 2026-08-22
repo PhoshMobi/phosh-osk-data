@@ -25,8 +25,8 @@ Once there get the Wikipedia dump:
 ssh ${BUILDER}
 mkdir output/
 cd output/
-export LANG=es
-wget "https://dumps.wikimedia.org/${LANG}wiki/latest/${LANG}wiki-latest-pages-articles.xml.bz2"
+export POS_LANG=es
+wget "https://dumps.wikimedia.org/${POS_LANG}wiki/latest/${POS_LANG}wiki-latest-pages-articles.xml.bz2"
 ```
 
 Import some nltk data:
@@ -38,10 +38,10 @@ python3 -c "import nltk; nltk.download('punkt')"
 Process the dump
 
 ```sh
-./pod-db-from-wiki-dump --processes "$(nproc)" --language "${LANG}" --dump "output/${LANG}wiki-latest-pages-articles.xml.bz2" --output  "output/${LANG}"
+./pod-db-from-wiki-dump --processes "$(nproc)" --language "${POS_LANG}" --dump "output/${POS_LANG}wiki-latest-pages-articles.xml.bz2" --output  "output/${POS_LANG}"
 ```
 
-You'll then get a database usable by presage based completers in `output/${LANG}/database_${LANG}.db`.
+You'll then get a database usable by presage based completers in `output/${POS_LANG}/database_${POS_LANG}.db`.
 
 This happens in steps so should a step fail you can skip it in subsequent runs.
 See the `--skip-*` options. The extract and parsing steps happen in parallel
