@@ -33,6 +33,7 @@ Import some nltk data:
 
 ```sh
 python3 -c "import nltk; nltk.download('punkt')"
+python3 -c "import nltk; nltk.download('punkt_tab')"
 ```
 
 Process the dump
