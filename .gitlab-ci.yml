@@ -20,7 +20,7 @@ stages:
   - build
   - test
   - style-checks
-  - deploy
+  - package
 
 default:
   # Protect CI infra from rogue jobs
@@ -48,11 +48,14 @@ variables:
 
 .step: &build_step
   script:
-    - mkdir -p out/
     - meson setup _build
     - meson test -C _build
-    - dpkg-buildpackage -uc -us -rfakeroot -A
-    - 'cp ../phosh-osk-data-*_$(dpkg-parsechangelog -SVersion)_all.deb out/'
+
+build:native-debian-forky:
+  stage: build
+  image: ${DEBIAN_IMAGE}
+  <<: *prep
+  <<: *build_step
 
 test-pkg-deb:
   stage: test
@@ -98,11 +101,14 @@ check-meson:
   extends:
     - .phosh-check-meson
 
-build:native-debian-forky:
-  stage: build
+package:native-debian-forky:
+  stage: package
   image: ${DEBIAN_IMAGE}
   <<: *prep
-  <<: *build_step
+  script:
+    - mkdir -p out/
+    - dpkg-buildpackage -uc -us -rfakeroot -A
+    - 'cp ../phosh-osk-data-*_$(dpkg-parsechangelog -SVersion)_all.deb out/'
   artifacts:
     paths:
       - out/
