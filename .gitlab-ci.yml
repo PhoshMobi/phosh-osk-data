@@ -82,7 +82,7 @@ test-pkg-plain:
 sanity:
   extends:
     - .fdo.ci-fairy
-  stage: build
+  stage: style-checks
   variables:
     GIT_DEPTH: "100"
   script: |
