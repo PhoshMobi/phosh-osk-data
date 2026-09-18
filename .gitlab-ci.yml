@@ -39,7 +39,8 @@ variables:
 .step: &build_step
   script:
     - mkdir -p out/
-    - make check
+    - meson setup _build
+    - meson test -C _build
     - dpkg-buildpackage -uc -us -rfakeroot -A
     - 'cp ../phosh-osk-data-*_$(dpkg-parsechangelog -SVersion)_all.deb out/'
 
