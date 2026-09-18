@@ -66,6 +66,18 @@ test-pkg-deb:
     - !reference [.phosh-prepare-apt]
     - ./phosh-osk-data-packager --language se --pkg deb
 
+test-pkg-plain:
+  stage: test
+  image: ${DEBIAN_IMAGE}
+  needs: []
+  variables:
+    PHOSH_ADDITIONAL_PKGS: >
+      python3-requests
+      python3-tqdm
+  script:
+    - !reference [.phosh-prepare-apt]
+    - ./phosh-osk-data-packager --language se --pkg plain
+
 # Sanity checks of MR settings and commit logs
 sanity:
   extends:
