@@ -1,7 +1,7 @@
 ---
 include:
   - project: 'World/Phosh/meta-phosh'
-    ref: '5e3667e2e4d3f23a5dcadaa2a4aadc8824a9e565'
+    ref: '8605615b6ce98e97ad0ab83c6e6ee55ffbbe5865'
     file: '/ci/phosh-common-jobs.yml'
   - project: 'Infrastructure/freedesktop-ci-templates'
     ref: '6a40df92957c8ce9ee741aaccc5daaaf70545b1e'
@@ -10,6 +10,7 @@ include:
 stages:
   - build
   - test
+  - style-checks
   - deploy
 
 default:
@@ -70,6 +71,11 @@ sanity:
       junit: commit-message-junit-report.xml
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME'
+
+check-meson:
+  stage: style-checks
+  extends:
+    - .phosh-check-meson
 
 build:native-debian-forky:
   stage: build
