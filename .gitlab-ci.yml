@@ -1,16 +1,26 @@
 ---
 include:
   - project: 'World/Phosh/meta-phosh'
-    ref: '5e3667e2e4d3f23a5dcadaa2a4aadc8824a9e565'
+    ref: '8605615b6ce98e97ad0ab83c6e6ee55ffbbe5865'
     file: '/ci/phosh-common-jobs.yml'
   - project: 'Infrastructure/freedesktop-ci-templates'
     ref: '6a40df92957c8ce9ee741aaccc5daaaf70545b1e'
     file: '/templates/ci-fairy.yml'
 
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    # Don't trigger a branch pipeline if there is an open MR
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH
+
 stages:
   - build
   - test
-  - deploy
+  - style-checks
+  - package
 
 default:
   # Protect CI infra from rogue jobs
@@ -38,10 +48,14 @@ variables:
 
 .step: &build_step
   script:
-    - mkdir -p out/
-    - make check
-    - dpkg-buildpackage -uc -us -rfakeroot -A
-    - 'cp ../phosh-osk-data-*_$(dpkg-parsechangelog -SVersion)_all.deb out/'
+    - meson setup _build
+    - meson test -C _build
+
+build:native-debian-forky:
+  stage: build
+  image: ${DEBIAN_IMAGE}
+  <<: *prep
+  <<: *build_step
 
 test-pkg-deb:
   stage: test
@@ -55,11 +69,23 @@ test-pkg-deb:
     - !reference [.phosh-prepare-apt]
     - ./phosh-osk-data-packager --language se --pkg deb
 
+test-pkg-plain:
+  stage: test
+  image: ${DEBIAN_IMAGE}
+  needs: []
+  variables:
+    PHOSH_ADDITIONAL_PKGS: >
+      python3-requests
+      python3-tqdm
+  script:
+    - !reference [.phosh-prepare-apt]
+    - ./phosh-osk-data-packager --language se --pkg plain
+
 # Sanity checks of MR settings and commit logs
 sanity:
   extends:
     - .fdo.ci-fairy
-  stage: build
+  stage: style-checks
   variables:
     GIT_DEPTH: "100"
   script: |
@@ -70,11 +96,19 @@ sanity:
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME'
 
-build:native-debian-forky:
-  stage: build
+check-meson:
+  stage: style-checks
+  extends:
+    - .phosh-check-meson
+
+package:native-debian-forky:
+  stage: package
   image: ${DEBIAN_IMAGE}
   <<: *prep
-  <<: *build_step
+  script:
+    - mkdir -p out/
+    - dpkg-buildpackage -uc -us -rfakeroot -A
+    - 'cp ../phosh-osk-data-*_$(dpkg-parsechangelog -SVersion)_all.deb out/'
   artifacts:
     paths:
       - out/

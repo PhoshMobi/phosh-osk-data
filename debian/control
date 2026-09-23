@@ -6,6 +6,7 @@ Rules-Requires-Root: no
 Build-Depends:
  debhelper-compat (= 13),
  flake8,
+ meson,
  python3-docutils,
  python3-nltk,
  wget,
@@ -16,14 +17,13 @@ Architecture: all
 Depends:
  python3-requests,
  python3-tqdm,
- ${shlibs:Depends},
  ${misc:Depends},
 Recommends:
  pkexec,
 Suggests:
  phosh-osk-stevia,
 Description: OSK completion data packager for Phosh
- Data to enable text completion in Phosh's On Screen Keyboard 
+ Data to enable text completion in Phosh's On Screen Keyboard
  Stevia via presage.
  .
  This package contains a script to download and package data

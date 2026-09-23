@@ -1,3 +1,4 @@
+_build
 input/
 out/
 data/
@@ -7,4 +8,5 @@ debian/debhelper-build-stamp
 debian/files
 debian/phosh-osk-data-packager/
 debian/phosh-osk-data-packager.substvars
-doc/*.1
+debian/phosh-osk-data-packager.debhelper.log
+debian/tmp/
