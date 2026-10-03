@@ -1,6 +1,7 @@
 phosh-osk-data 0.58.0
 ---------------------
 Released October 2026
+* New databases: en
 * Add `plain` mode to install to $HOME, useful on immutable systems
 * Issues fixed:
     * https://gitlab.gnome.org/World/Phosh/phosh-osk-data/-/work_items/4
