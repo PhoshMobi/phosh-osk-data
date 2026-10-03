@@ -1,3 +1,28 @@
+phosh-osk-data (0.58.0) experimental; urgency=medium
+
+  * ci: Use recent image.
+  * packaging: Fix typo.
+  * data-packager: Support plain packaging format.
+    This gets the files verbatim and installs them to `~/.local/share/`.
+    Useful on immutable images.
+  * doc: Use `POS_LANG`. `LANG` is used by locales so it is set and may lead to
+    funny error messages.
+  * doc: Fix indent
+  * doc: Import punkt_tab as well. This is at least needed on Debian Trixie
+  * manpage: Mention `plain` mode
+  * Bump the default version to download
+  * build: Build with meson.
+    Drop make, this gives us a nice dist tarball for free
+    Closes: https://gitlab.gnome.org/World/Phosh/phosh-osk-data/-/work_items/4
+  * ci: Check meson format.
+    We add our shared-scripts for that
+  * ci: Add workflow rules.
+  * ci: Add check job for plain too.
+  * ci: Move sanity check to style-checks.
+  * ci: Separate build from packaging step.
+
+ -- Guido Günther <agx@sigxcpu.org>  Sat, 03 Oct 2026 17:13:32 +0200
+
 phosh-osk-data (0.53.0) experimental; urgency=medium
 
   * ci: Test packaging step.
